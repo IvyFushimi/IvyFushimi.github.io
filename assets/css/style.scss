@@ -1,0 +1,143 @@
+---
+---
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap');
+@import "{{ site.theme }}";
+
+/* ---- 覆盖 cayman 主题：克制、留白、蓝白片头卡质感 ---- */
+
+:root {
+  --paper: #fafbfd;
+  --ink: #12203a;
+  --ink-soft: #56698a;
+  --rule: #d6dfec;
+  --blue: #35588f;
+  --blue-deep: #16314f;
+  --mist: #eef2f8;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* 头部：不用渐变色带，靠留白与衬线大字立住气质 */
+.page-header {
+  background: var(--paper);
+  padding: 6rem 1rem 4.5rem;
+  border-bottom: none;
+}
+
+.project-name {
+  font-family: "Jost", "Century Gothic", "Avenir Next", "Futura", sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+  font-size: 2.6rem;
+  letter-spacing: 0.35em;
+  text-indent: 0.35em; /* 补偿末字 letter-spacing 造成的视觉偏移 */
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+  display: inline-block;
+  max-width: 100%;
+}
+
+.project-tagline {
+  margin-top: 1.6rem;
+  color: var(--ink-soft);
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  opacity: 1;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--rule);
+  display: inline-block;
+}
+
+.main-content {
+  max-width: 700px;
+  padding: 3.5rem 1rem 5rem;
+}
+
+.main-content h2 {
+  font-family: "Source Han Serif SC", "Songti SC", "STSong", serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  letter-spacing: 0.3em;
+  color: var(--ink);
+  border-bottom: none;
+  margin: 0 0 2rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.main-content a {
+  color: var(--blue);
+}
+
+/* 作品列表：直角卡片，细线分隔，档案感而非气泡卡 */
+.work-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.9rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.work-list li.work-card:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.work-card h3 {
+  margin: 0;
+  font-family: "Source Han Serif SC", "Songti SC", "STSong", serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.work-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+.work-btn {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  padding: 0.55rem 1.4rem;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.work-btn:hover {
+  background: var(--blue);
+  color: var(--paper);
+}
+
+/* 占位卡片 */
+.work-card.placeholder {
+  color: var(--ink-soft);
+}
+
+.work-card.placeholder h3 {
+  color: var(--ink-soft);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+}
