@@ -42,12 +42,14 @@ body {
   text-indent: 0.35em; /* 补偿末字 letter-spacing 造成的视觉偏移 */
   padding-top: 1.4rem;
   border-top: 1px solid var(--rule);
-  display: inline-block;
+  display: block;
+  width: fit-content;
   max-width: 100%;
+  margin: 0 auto;
 }
 
 .project-tagline {
-  margin-top: 1.6rem;
+  margin: 1.6rem auto 0;
   color: var(--ink-soft);
   font-weight: 400;
   font-size: 0.95rem;
@@ -55,11 +57,13 @@ body {
   opacity: 1;
   padding-bottom: 1.4rem;
   border-bottom: 1px solid var(--rule);
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .main-content {
-  max-width: 700px;
+  max-width: 860px;
   padding: 3.5rem 1rem 5rem;
 }
 
