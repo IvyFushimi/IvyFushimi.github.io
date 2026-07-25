@@ -6,8 +6,13 @@
     <p>从版本节奏、商业化、口碑、社区活跃四个维度，复盘开服半年内的内容质量修复期与商业化衰减期错位现象。</p>
     <a class="work-btn" href="Endfield/Endfield_review.html">查看复盘 →</a>
   </li>
-  <li class="work-card placeholder">
-    <h3>敬请期待</h3>
+  <li class="work-card">
+    <h3>AB_test_flow — A/B 实验设计与分析工具</h3>
+    <p>面向游戏数据分析场景的 A/B 测试框架：以「新版本 DAU 下降 10%」为案例，演示核心指标（周均登录天数、次周留存）与护栏指标（ARPU、货币通胀、核心玩法参与度）的设计，采用账号级随机、A/B/C 对照与保留组，实验周期不少于 14 天。</p>
+    <div class="work-actions">
+      <a class="work-btn" href="https://ab-test-flow-j61d.vercel.app/" target="_blank" rel="noopener">在线体验 →</a>
+      <a class="work-btn" href="https://github.com/IvyFushimi/AB_test_flow" target="_blank" rel="noopener">查看源码 →</a>
+    </div>
   </li>
   <li class="work-card placeholder">
     <h3>敬请期待</h3>
