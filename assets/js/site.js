@@ -35,27 +35,38 @@
 
   var COLORS = ["#669288", "#D7DECC", "#374254"];
   var last = 0;
-  var THROTTLE_MS = 45;
+  var THROTTLE_MS = 20;
+  var LIFETIME_MS = 750;
 
   function spawnPixel(x, y) {
     var now = performance.now();
     if (now - last < THROTTLE_MS) return;
     last = now;
 
+    // 尺寸随机 + 轻微散布位移，制造"像素颗粒飞溅"而非单排小圆点的观感
+    var size = 8 + Math.round(Math.random() * 8); // 8–16px
+    var jitterX = (Math.random() - 0.5) * 10;
+    var jitterY = (Math.random() - 0.5) * 10;
+
     var dot = document.createElement("span");
     dot.className = "pixel-trail-dot";
-    dot.style.left = x + "px";
-    dot.style.top = y + "px";
+    dot.style.left = x + jitterX + "px";
+    dot.style.top = y + jitterY + "px";
+    dot.style.width = size + "px";
+    dot.style.height = size + "px";
     dot.style.background = COLORS[(Math.random() * COLORS.length) | 0];
     document.body.appendChild(dot);
 
     requestAnimationFrame(function () {
       dot.style.opacity = "0";
-      dot.style.transform = "translate(-50%, -50%) scale(0.2)";
+      dot.style.transform =
+        "translate(-50%, -50%) scale(0.15) rotate(" +
+        (Math.random() > 0.5 ? 25 : -25) +
+        "deg)";
     });
     setTimeout(function () {
       dot.remove();
-    }, 500);
+    }, LIFETIME_MS);
   }
 
   window.addEventListener(
