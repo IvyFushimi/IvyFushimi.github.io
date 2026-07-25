@@ -14,7 +14,12 @@
       <a class="work-btn" href="https://github.com/IvyFushimi/AB_test_flow" target="_blank" rel="noopener">查看源码 →</a>
     </div>
   </li>
-  <li class="work-card placeholder">
-    <h3>敬请期待</h3>
+  <li class="work-card">
+    <h3>GRIST — 游戏评论洞察 Agent</h3>
+    <p>把几万条散乱的玩家评论压缩成可决策的洞察：LLM 情感三分类 + 6 大议题分类，再做卡方 / Cramer's V 群体差异显著性检验，量化「口碑是否真的回暖、哪个议题仍是短板」。内置游戏领域知识，架构与游戏解耦，换一个配置即可分析任意游戏。</p>
+    <div class="work-actions">
+      <a class="work-btn" href="https://github.com/IvyFushimi/GRIST_game_review_insight_sentiment_topics_agent" target="_blank" rel="noopener">查看源码 →</a>
+      <a class="work-btn" href="https://github.com/IvyFushimi/GRIST_game_review_insight_sentiment_topics_agent/blob/main/notebooks/demo.ipynb" target="_blank" rel="noopener">完整流程演示 →</a>
+    </div>
   </li>
 </ul>
