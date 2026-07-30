@@ -16,14 +16,24 @@
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     {% if page.url == "/" %}
+    <div class="persona-flash" aria-hidden="true"></div>
+
+    <div class="persona-toggle" role="group" aria-label="切换作品分区">
+      <button type="button" class="persona-toggle-btn is-active" data-persona="ivy" aria-pressed="true">Reality</button>
+      <button type="button" class="persona-toggle-btn" data-persona="midnight" aria-pressed="false">Virtual</button>
+      <span class="persona-toggle-thumb" aria-hidden="true"></span>
+    </div>
+
     <section class="hero-cover">
       <span class="pixel-cloud pixel-cloud--tl" aria-hidden="true"></span>
       <span class="pixel-cloud pixel-cloud--tr" aria-hidden="true"></span>
       <span class="pixel-cloud pixel-cloud--bl" aria-hidden="true"></span>
       <span class="pixel-cloud pixel-cloud--br" aria-hidden="true"></span>
 
-      <h1 class="hero-title">{{ site.title | default: site.github.repository_name }}</h1>
-      <h2 class="hero-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
+      <div class="persona-hero persona-hero--ivy">
+        <h1 class="hero-title">Ivy Fushimi</h1>
+        <h2 class="hero-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
+      </div>
 
       <a class="scroll-cue" href="#content">
         <span>SCROLL</span>

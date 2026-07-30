@@ -9,6 +9,7 @@
 :root {
   --paper: #f9f7ea;
   --ink: #374254;
+  --ink-rgb: 55, 66, 84;
   --ink-soft: #6b7688;
   --mist: #d7dece;
   --rule: #c6d0c1;
@@ -16,6 +17,19 @@
   --sage-deep: #4c766c;
   --cover-bg: #374254;
   --cover-fg: #f9f7ea;
+}
+
+/* Transparent Midnight 人格：由白 / 墨黑 / 暗红故障插画派生的色系，
+   结构与交互完全复用 Ivy Fushimi 一侧，仅替换色板变量 */
+:root[data-persona="midnight"] {
+  --paper: #f2f1ee;
+  --ink: #1a1a1a;
+  --ink-rgb: 26, 26, 26;
+  --ink-soft: #58565a;
+  --mist: #ded9d6;
+  --rule: #cfc9c5;
+  --sage: #9c1f28;
+  --sage-deep: #6e161d;
 }
 
 * {
@@ -429,6 +443,125 @@ body {
 }
 
 /* ==========================================================================
+   Ivy Fushimi / Transparent Midnight 双人格切换
+   ========================================================================== */
+
+.persona-content--midnight {
+  display: none;
+}
+
+.persona-content--ivy {
+  display: block;
+}
+
+:root[data-persona="midnight"] .persona-hero--ivy,
+:root[data-persona="midnight"] .persona-content--ivy {
+  display: none;
+}
+
+:root[data-persona="midnight"] .persona-content--midnight {
+  display: block;
+}
+
+.persona-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--ink);
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(255, 255, 255, 0.07) 3px 4px),
+    repeating-linear-gradient(90deg, transparent 0 3px, rgba(255, 255, 255, 0.07) 3px 4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.14s steps(4);
+}
+
+.persona-flash.is-active {
+  opacity: 0.92;
+}
+
+.persona-toggle {
+  position: fixed;
+  top: 1.4rem;
+  right: 1.4rem;
+  z-index: 20;
+  display: flex;
+  background: rgba(var(--ink-rgb), 0.85);
+  backdrop-filter: blur(2px);
+  border: 1px solid var(--sage);
+  padding: 3px;
+  gap: 3px;
+}
+
+.persona-toggle-btn {
+  position: relative;
+  z-index: 1;
+  border: none;
+  background: transparent;
+  color: var(--mist);
+  font-family: "Jost", "Century Gothic", "Avenir Next", "Futura", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s steps(3);
+  white-space: nowrap;
+}
+
+.persona-toggle-btn.is-active {
+  color: var(--paper);
+}
+
+.persona-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  background: var(--sage);
+  transition: transform 0.28s steps(6);
+  pointer-events: none;
+}
+
+:root[data-persona="midnight"] .persona-toggle-thumb {
+  transform: translateX(calc(100% + 3px));
+}
+
+:root[data-persona="midnight"] .hero-cover {
+  background-image: url("../images/transparent-midnight-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-color: #f2f0ea;
+}
+
+:root[data-persona="midnight"] .pixel-cloud {
+  display: none;
+}
+
+:root[data-persona="midnight"] .scroll-cue {
+  color: var(--ink-soft);
+}
+
+:root[data-persona="midnight"] .scroll-cue:hover {
+  color: var(--sage-deep);
+}
+
+:root[data-persona="midnight"] .pixel-arrow {
+  background: var(--sage-deep);
+}
+
+@media (max-width: 640px) {
+  .persona-toggle {
+    top: 0.8rem;
+    right: 0.8rem;
+  }
+  .persona-toggle-btn {
+    font-size: 0.62rem;
+    padding: 0.45rem 0.6rem;
+  }
+}
+
+/* ==========================================================================
    首页三等分作品分类入口
    ========================================================================== */
 
@@ -439,7 +572,7 @@ body {
   width: 100vw;
   display: flex;
   flex-wrap: wrap;
-  min-height: 60vh;
+  min-height: 100svh;
   border-top: 1px solid var(--rule);
 }
 
@@ -516,6 +649,124 @@ body {
   color: var(--ink-soft);
   font-weight: 300;
   letter-spacing: 0.2em;
+}
+
+/* ==========================================================================
+   Design 作品陈列：横向滚动分页，每屏一件作品
+   ========================================================================== */
+
+/* gallery-frame 把横向画廊和底部提示文字锁在同一屏里：画廊用 flex:1
+   吃掉除提示文字外的所有高度，两者加起来正好是一屏，不用再往下滚一次 */
+.gallery-frame {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-scroll {
+  margin: 0 0 0 calc(50% - 50vw);
+  width: 100vw;
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-top: 1px solid var(--rule);
+  scrollbar-color: var(--sage) var(--mist);
+}
+
+.gallery-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.gallery-scroll::-webkit-scrollbar-track {
+  background: var(--mist);
+}
+
+.gallery-scroll::-webkit-scrollbar-thumb {
+  background: var(--sage);
+}
+
+.gallery-panel {
+  flex: 0 0 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 6vh 6vw 2rem;
+  box-sizing: border-box;
+  border-right: 1px solid var(--rule);
+}
+
+.gallery-index {
+  font-family: "Jost", "Century Gothic", "Avenir Next", "Futura", sans-serif;
+  font-weight: 300;
+  font-size: clamp(4.5rem, 13vw, 8.5rem);
+  letter-spacing: 0.05em;
+  color: var(--sage);
+  line-height: 1;
+  margin-bottom: 2.2rem;
+}
+
+.gallery-body {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.gallery-meta {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gallery-field {
+  background: var(--mist);
+  color: var(--ink-soft);
+  padding: 1rem 1.2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.gallery-field--name {
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+
+.gallery-field--tag {
+  align-self: flex-start;
+}
+
+.gallery-field--intro {
+  flex: 1;
+  line-height: 1.8;
+}
+
+.gallery-field--image {
+  flex: 2 1 360px;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.gallery-hint {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  margin: 1.4rem 0 0;
+}
+
+@media (max-width: 720px) {
+  .gallery-body {
+    flex-direction: column;
+  }
+  .gallery-field--image {
+    min-height: 220px;
+  }
 }
 
 /* ==========================================================================
