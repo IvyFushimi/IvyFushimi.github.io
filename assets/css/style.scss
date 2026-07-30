@@ -44,6 +44,10 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  /* .category-split / .gallery-scroll 用 100vw 做满宽出血：只要页面出现纵向
+     滚动条，100vw 就会比实际可见宽度多出滚动条那几像素，从而多出一条横向
+     滚动条。裁掉这几像素的溢出，避免出现浏览器自带的左右滑杆 */
+  overflow-x: hidden;
 }
 
 /* ==========================================================================
@@ -565,14 +569,27 @@ body {
    首页三等分作品分类入口
    ========================================================================== */
 
+/* category-frame 把"作品目录"标题和下面的分类入口锁在同一屏：
+   标题占自然高度，category-split 用 flex:1 吃掉剩余高度，
+   两者加起来正好是一屏，不用再往下滚一次 */
+.category-frame {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.category-frame h2 {
+  flex: 0 0 auto;
+}
+
 .category-split {
   list-style: none;
   margin: 0 0 0 calc(50% - 50vw);
   padding: 0;
   width: 100vw;
   display: flex;
+  flex: 1;
   flex-wrap: wrap;
-  min-height: 100svh;
   border-top: 1px solid var(--rule);
 }
 
